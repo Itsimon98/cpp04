@@ -5,11 +5,13 @@
 #include "WrongCat.hpp"
 #define N_ANIMALS 4
 
+#define N_ANIMALS 4
+
 int	main() {
 	{
 		std::cout << "------- ANIMALS -------" << std::endl;
 		const Animal*	zoo[N_ANIMALS];
-
+		// Animal test; // to check abstract class
 		for (int i = 0; i < N_ANIMALS / 2; i++)
 			zoo[i] = new Cat();
 		for (int i = N_ANIMALS / 2; i < N_ANIMALS; i++)
@@ -17,40 +19,34 @@ int	main() {
 		for (int i = 0; i < N_ANIMALS; i++)
 			zoo[i]->makeSound();
 		Cat* cat = new Cat();
-		Dog* dog = new Dog();
-		std::cout << "Cat ideas" << std::endl;
 		cat->getBrain()->setIdeas("Ideas on animals brain 1");
 		cat->getBrain()->setIdeas("Ideas on animals brain 2");
 		cat->getBrain()->setIdeas("Ideas on animals brain 3");
 		cat->getBrain()->setIdeas("Ideas on animals brain 4");
+		Cat* cat2 = new Cat(*cat);
+		cat2->getBrain()->setIdeas("Ideas on animals brain 7");
 		cat->getBrain()->printIdeas();
-		std::cout << "Dog ideas" << std::endl;
-		dog->getBrain()->setIdeas("Ideas on animals brain 1");
-		dog->getBrain()->setIdeas("Ideas on animals brain 2");
-		dog->getBrain()->setIdeas("Ideas on animals brain 3");
-		dog->getBrain()->setIdeas("Ideas on animals brain 4");
-		dog->getBrain()->printIdeas();
-		delete dog;
+		cat2->getBrain()->printIdeas();
 		for (int i = 0; i < N_ANIMALS; i++)
 			delete zoo[i];
-			delete cat;
-	
-		std::cout<< std::endl;
+	}
+	{
+		std::cout << "------- BRAIN -------" << std::endl;
 
-		Brain*	firstbrain = new Brain();
+		Brain*	normal = new Brain();
 
-		firstbrain->setIdeas("My name is AB");
-		firstbrain->setIdeas("I like watching movies");
-		firstbrain->setIdeas("My favourite is Frankenstein Junior");
+		normal->setIdeas("My name is AB");
+		normal->setIdeas("I like watching movies");
+		normal->setIdeas("My favourite is Frankenstein Junior");
 
-		firstbrain->printIdeas();
+		normal->printIdeas();
 
-		Brain*	secondbrain = new Brain(*firstbrain);
+		Brain*	abnormal = new Brain(*normal);
 
-		delete firstbrain;
+		delete normal;
 
-		secondbrain->printIdeas();
+		abnormal->printIdeas();
 
-		delete secondbrain;
+		delete abnormal;
 	}
 }
